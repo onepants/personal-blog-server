@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <div class="container">
+    	<header class="topHeader"><span>我的博客</span><a href="/users/adminLogout" id="getout">退出</a></header>
+    	<div class="content">
+    		<aside>
+    			<ul class="menu">
+    				<li><a href="/">系统首页</a></li>
+    				<li class="active"><a href="/banner">图片管理</a></li>
+    				<li><a href="/articles">文章管理</a></li>
+    			</ul>
+    		</aside>
+    		<section>
+    			<h3 style="margin-top:30px;margin-left:50px;">单图上传</h3>
+    			<form class="bannerForm" action="/banner/addBanner" method="post" enctype="multipart/form-data">
+    				<img id="addImg" src="/images/0.jpg"/>
+    				<input type="file" name="bannerImg" id="bannerImg" value="只能上传图片" accept="image/*" style="outline:none;"/>
+    				<input type="submit" value="上传" id="aa"/>
+    			</form>
+    			<table border="" cellspacing="0">
+    				<tr>
+    					<th>序号</th>
+    					<th>图片</th>
+    					<th>是否使用</th>
+    					<th>操作</th>
+    				</tr>
+    				<% if(list) { %>
+             <% for(var i = 0; i < list.length; i++){%>
+                 <tr>
+                    <td>
+                  <%=  i*1+1 %>
+                    </td>
+                    <td>
+                    <img src="<%= list[i].src.split('public')[1] %>"/>
+                    </td>
+                    <td>
+                    <input type="checkbox"  checked="" />
+                    </td>
+                    <td>
+                    <a href = "/banner/delete?bannerID=<%= list[i].bannerID %>">删除</a> 
+                    </td>
+                 </tr>
+             <% }%>
+          	<%}else{%>
+             <tr>
+                <td colspan="4">查无数据</td>
+             </tr>
+          	<% }%>
+    			</table>
+    		</section>
+    	</div>
+    	<footer>版权所有 翻版必究</footer>
+    </div>
+  </body>
+  <script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+		$("#addImg").on("click",function(){
+			$("#bannerImg").click();
+		})
+		
+		$("#aa").on("click",function(){
+				if($("input[type='file']").val()==""){
+    			//未选择文件
+    			alert("请选择文件");
+    			return false;
+				}				
+		})
+		
+//		window.alert = function(str)  
+//{  
+//  var shield = document.createElement("DIV");  
+//  shield.id = "shield";  
+//  shield.style.position = "absolute";  
+//  //shield.style.left = "0px";  
+// // shield.style.top = "0px";  
+//  shield.style.width = "100%";  
+//  //shield.style.height = document.body.scrollHeight+"px";  
+//  //弹出对话框时的背景颜色  
+//  shield.style.background = "#fff";  
+//  shield.style.textAlign = "center";  
+//  shield.style.zIndex = "25";  
+//  //背景透明 IE有效  
+//  //shield.style.filter = "alpha(opacity=0)";  
+//  var alertFram = document.createElement("DIV");  
+//  alertFram.id="alertFram";  
+//  alertFram.style.position = "absolute";  
+//  alertFram.style.left = "50%";  
+//  alertFram.style.top = "50%";  
+//  alertFram.style.marginLeft = "-145px";  
+//  alertFram.style.marginTop = "-315px";  
+//  alertFram.style.width = "350px";  
+//  alertFram.style.height = "150px";  
+//  alertFram.style.background = "#ff0000";  
+//  alertFram.style.textAlign = "center";  
+//  alertFram.style.lineHeight = "150px";  
+//  alertFram.style.zIndex = "300";  
+//  strHtml = "<ul style=\"list-style:none;margin:0px;padding:0px;width:100%\">\n";  
+//   strHtml += " <li style=\"background:#DD828D;text-align:left;padding-left:20px;font-size:14px;font-weight:bold;height:35px;line-height:35px;border:1px solid #F9CADE;color:#fff;\">代码之神八阿哥表示：</li>\n";  
+//  strHtml += " <li style=\"background:#fff;text-align:center;font-size:12px;height:120px;line-height:120px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;\">"+str+"</li>\n";  
+//  strHtml += " <li style=\"background:#FDEEF4;text-align:center;font-weight:bold;height:35px;line-height:35px;padding-bottom:10px;border:1px solid #F9CADE;\"><input type=\"button\" value=\"OK?\" onclick=\"doOk()\" style=\"background:#fff;outline:none;width:40px;margin-left:250px;text-align:center;font-weight:bold;height:30px;line-height:30px; border:1px solid #F9CADE;\"/></li>\n";  
+//  strHtml += "</ul>\n";  
+//  alertFram.innerHTML = strHtml;  
+//  document.body.appendChild(alertFram);  
+//  document.body.appendChild(shield);  
+//  var ad = setInterval("doAlpha()",5);  
+//  this.doOk = function(){  
+//  alertFram.style.display = "none";  
+//  shield.style.display = "none";  
+//  }  
+//  alertFram.focus();  
+//  document.body.onselectstart = function(){return false;};  
+//}
+		
+		
+  </script>
+</html>

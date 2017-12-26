@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <div class="container">
+    	<header class="topHeader"><span>我的博客</span><a href="/users/adminLogout" id="getout">退出</a></header>
+    	<div class="content">
+    		<aside>
+    			<ul class="menu">
+    				<li class="active"><a href="/">系统首页</a></li>
+    				<li><a href="/banner">图片管理</a></li>
+    				<li><a href="/articles">文章管理</a></li>
+    			</ul>
+    		</aside>
+    		<section>
+    			<h1 style="text-align: center;margin-top:100px">数据统计</h1>
+    			<input type="text" name="biao" id="biao" value="<%= file1.length%>" style="display:none"/>
+    			<p style="font-size:33px;text-align:center;margin-top:100px">图片总量：<input type="text" name="num" id="num" style="height:40px;width:200px;margin-left:250px;font-size:40px;border:none;outline:none;"/></p>
+    		</section>
+    	</div>
+    	<footer>版权所有 翻版必究</footer>
+    </div>
+  </body>
+  <script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/num.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+
+  	
+  	
+  	var num = 0;
+  	//var s = $("#biao").val()
+  	var s = 31;
+	var timer = setInterval(function(){    				
+    	num += 1;
+    	$("#num").val(num);
+	    if(num == s){
+	    	clearInterval(timer);
+	   	}
+    },40)
+    
+    
+   
+  </script>
+</html>

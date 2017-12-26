@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    <style type="text/css">
+    	.toHeader p{
+    		margin:100px;
+    		text-align:center;
+    		font-size:18px;
+    		font-weight: bold;
+    	}
+    	#username{
+    		margin:0 auto;
+    	}
+    	.user,.psd{
+				width:300px;
+				height:40px;
+				background:#fff;
+				margin-bottom:25px;
+				border:1px solid #ddd;
+			}
+			.user input,.psd input{
+				width:275px;
+				height:35px;
+				margin-left:20px;
+				border:none;
+				margin-top:2px;
+				outline:none;
+			}
+			#username{
+				margin-left:20px;
+				margin-top:2px;
+			}
+			.container{
+				width:300px;
+				margin:0 auto;
+			}
+			#btn{
+				width:300px;
+				height:40px;
+				background:#00B7FF;
+				border:none;
+			}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    	<header class="toHeader"><p>管理员登录</p></header>
+    	<div class="content">
+    		<form>
+    			<div class="user">
+    				<input type="text" name="username" id="username" placeholder="请输入口令"/>
+    			</div>
+    			<div class="psd">
+    				<input type="password" name="password" id="password" placeholder="请输入秘钥"/>
+    			</div>
+    			<input type="button" id="btn" value="登录"/>
+    		</form>
+    	</div>
+    </div>
+  </body>
+  <script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+  	$("#btn").on("click",function(){
+  		$.ajax({
+  			type:"post",
+  			url:"/users/adminLogin",
+  			data:$("form").serialize(),
+  			success:function(data){
+  				if(data == "1"){
+  					window.location.reload()
+  				}else if(data == "0"){
+  					alert("警告：自毁程序已启动！倒计时30秒")
+  				}
+  			}
+  		});
+  	})
+  </script>
+</html>
+ 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    <script src="/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/ueditor/ueditor.all.min.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="/ueditor/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="container">
+    	<header class="topHeader"><span>我的博客</span><a href="/users/adminLogout" id="getout">退出</a></header>
+    	<div class="content">
+    		<aside>
+    			<ul class="menu">
+    				<li><a href="/">系统首页</a></li>
+    				<li><a href="/banner">图片管理</a></li>
+    				<li class="active"><a href="/articles">文章管理</a></li>
+    			</ul>
+    		</aside>
+    		<section>
+    			<input type="text" name="title" id="title" value="" placeholder="标题"/>
+          <input type="text" name="author" id="author" value="" placeholder="作者"/>
+          <input type="url" name="url" id="url" value="" placeholder="转载自..."/>
+          <script id="box" name="content" type="text/plain"></script>
+          <button id="btn">提交</button>
+    		</section>
+    	</div>
+    	<footer>版权所有 翻版必究</footer>
+    </div>
+  </body>
+  <script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+  	 var ue = UE.getEditor('box', {
+  	 	 	initialFrameWidth : 1000,//默认宽度
+        initialFrameHeight: 300//默认高度
+  	 })
+  	 
+  	 $("#btn").on("click",function(){
+         var html = ue.getContent();
+         console.log(html)
+         $.ajax({
+           type:"post",
+           url:"/articles/addArticle",
+           data:{
+             title:$("#title").val(),
+             author:$("#author").val(),
+             url:$("#url").val(),
+             html:html,
+             date: new Date().getTime()
+           },
+           success:function(data){
+             console.log(data)
+             $("#title").val("")
+             $("#author").val("")
+             $("#url").val("")
+             ue.setContent("")
+           }
+         })
+      })
+  </script>
+</html>
